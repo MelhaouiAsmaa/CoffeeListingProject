@@ -1,0 +1,40 @@
+<body>
+
+  <div class="container">
+    <h1 class="h1">
+      Coffee List
+    </h1>
+    <table class="rwd-table">
+      <thead>
+        <tr>
+          <th style="display:none;">Coffee ID</th>
+          <th>Blend Name</th>
+          <th>Origin</th>
+          <th>Variety</th>
+          <th>Notes</th>
+          <th>Intensifier</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of coffees | paginate : {
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: count
+        }; let i = index" [class.active]="i == currentIndex">
+          <td data-th="Coffee ID" style="display:none;">{{prod.id}}</td>
+          <td data-th="Coffee Label">{{prod.blend_name}}</td>
+          <td data-th="Origin">{{prod.origin}}</td>
+          <td data-th="Variety">{{prod.variety}}</td>
+          <td data-th="Notes">{{prod.notes}}</td>
+          <td data-th="Intensifier">{{prod.intensifier}}</td>
+          <td><button (click)="gotoDetails(prod.id)" type="button" class="btn">View details</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+        (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+  </div>
+</body>
